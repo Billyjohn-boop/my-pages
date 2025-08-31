@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T,I,F,Y</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #ffe6eb;
+      margin: 0;
+      text-align: center;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 400px;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .yes-btn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+    .no-btn {
+      background-color: #666;
+      color: white;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+    .hidden {
+      display: none;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+    #reminder {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="main">
+    <h2 id="mainQuestion"> Pwede bata mo apas rong kalag kalag? </h2>
+    <button class="yes-btn" onclick="showYes()">Yes</button>
+    <button class="no-btn" onclick="showNo()">No</button>
+
+    <p id="reminder" class="hidden">Para d naka cgeg balik balik og explain pislita nanang YES para ato nang sugdan ang paghinungitay og biko </p>
+
+    <div id="yesSection" class="hidden">
+      <h3>Dko gwapo hah pero usa kos pinaka but an ana akong mama, unsa may pangita nimo pure love? sus naakoy daghan ana, d gyud ka mag mahay</h3>
+      <img src="8b9e423b-e756-4d8a-ab7a-564705ce6797-1714904983142.png" alt="Blushing Face">
+    </div>
+
+    <div id="noSection" class="hidden">
+      <h3>Nganong d man ka mosugot nga grasya man ko?</h3>
+      <textarea id="noAnswer" placeholder="Type your answer kanang elaborated hah..."></textarea>
+    </div>
+  </div>
+
+  <script>
+    function showYes() {
+      document.getElementById("yesSection").classList.remove("hidden");
+      document.getElementById("noSection").classList.add("hidden");
+      document.getElementById("reminder").classList.add("hidden");
+    }
+
+    function showNo() {
+      document.getElementById("noSection").classList.remove("hidden");
+      document.getElementById("yesSection").classList.add("hidden");
+
+      // Focus on the textarea so user can type right away
+      document.getElementById("noAnswer").focus();
+    }
+
+    // Detect Enter key in textarea
+    document.getElementById("noAnswer").addEventListener("keydown", function(event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault(); // Prevents adding a new line
+        resetToMain();
+      }
+    });
+
+    function resetToMain() {
+      document.getElementById("noAnswer").value = ""; // Clear input
+      document.getElementById("yesSection").classList.add("hidden");
+      document.getElementById("noSection").classList.add("hidden");
+      document.getElementById("mainQuestion").innerText = "kong dili kas kalag-kalag isbog tag apas aris pasko";
+      document.getElementById("reminder").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
